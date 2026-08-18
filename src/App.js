@@ -140,8 +140,8 @@ function App() {
   );
 
   return (
-    <div>
-      <div>
+    <div className="min-h-screen flex flex-col items-center justify-start bg-white p-8">
+      <div className="mb-4 flex items-center space-x-2">
         <span>Filter: </span>
         {/* Dropdown for filter status */}
         <select
@@ -150,16 +150,22 @@ function App() {
           className="border border-gray-300 rounded-md px-2 py-1"
         >
           <option value="All">All</option>
-          <option value="PENDING">Pending</option>
-          <option value="IN_PROGRESS">In Progress</option>
-          <option value="COMPLETED">Completed</option>
+          <option className="bg-yellow-100" value="PENDING">
+            Pending
+          </option>
+          <option className="bg-blue-100" value="IN_PROGRESS">
+            In Progress
+          </option>
+          <option className="bg-green-100" value="COMPLETED">
+            Completed
+          </option>
         </select>
       </div>
 
       {/* Worklist Table */}
-      <table className="flex-center border border-gray-300">
-        <tbody>
-          <tr>
+      <table className="border border-gray-300 rounded-lg overflow-hidden w-full max-w-3xl">
+        <tbody className="bg-gray-100">
+          <tr className="bg-blue-200 text-center">
             <th>Patient</th>
             <th>Modality</th>
             <th>Study Date</th>
@@ -177,15 +183,15 @@ function App() {
                   setSelectedCase(item);
                   setShowModal(true);
                 }}
-                className="cursor-pointer hover:bg-gray-100"
+                className="text-center cursor-pointer hover:bg-orange-100 transition-colors duration-200"
               >
                 <td>{item.patientName}</td>
                 <td>{item.modality}</td>
                 <td>{item.studyDate}</td>
-                <td>
+                <td className="flex justify-center">
                   {/* Status button with color coding based on status */}
                   <button
-                    className={`px-2 py-1 rounded-md text-sm font-medium ${
+                    className={`justify-center px-2 py-1 rounded-md text-sm font-medium ${
                       item.status === "PENDING"
                         ? "bg-yellow-100 text-yellow-800"
                         : item.status === "IN_PROGRESS"
@@ -205,7 +211,7 @@ function App() {
       {/* Modal for case details */}
       {showModal && selectedCase && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-md w-96">
+          <div className="bg-white p-6 rounded-md shadow-lg w-96">
             <h2 className="text-xl font-bold mb-4">Case Details</h2>
             <p>
               <strong>Patient Name:</strong> {selectedCase.patientName}
@@ -235,7 +241,7 @@ function App() {
                     value={reportText}
                     onChange={(e) => setReportText(e.target.value)}
                     placeholder="Enter report details..."
-                    className="border border-gray-300 rounded-md p-2"
+                    className="border border-gray-300 rounded-md p-2 w-full mt-2"
                   />
                 </div>
 
